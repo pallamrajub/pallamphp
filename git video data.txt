@@ -1,0 +1,306 @@
+first video
+git status
+git init 
+touch f1
+git config --global user.name "pallamraju"
+git config --global user.email "pallamraju.boddu@gmail.com
+git status-->untracked file (f1)
+git add f1
+git status--->moved to staging area(f1)
+git commit -m"f1" f1
+git status--->move to local repo
+no commit to yet , free to clean
+now file in local repo
+git log (we have log id of files)
+git show cid(commit id)
+-----------------------------
+2 nd video
+git clone path of central repo
+ls
+git push f1
+now f1 pushed to f1
+now, delete the file in central repo
+rm f1
+git add f1
+git commit -m "deleeted file"
+git push
+f1 file is deleted to central repo
+
+git log -n(number of files)
+git log -1
+git log --oneline(display one line message)
+git log --author
+git log --oneline --author=pallamraju -n
+git log --oneline -n--since=yy-mm-dd 
+git log --until=yy-mm-dd
+git log --since=yy-mm-dd --until=yy-mm-dd
+--------------------------------
+3rd video
+from central repo to local repo to staging area to working area steps
+git reset --soft cid(which file you have to reset before commit id)
+git reset head filename
+git reset --mixed cid(which file you have to reset before commit id)(when use this command ,if another file is in staging area then that file also back to working stage)
+
+we have 100 files in local repo then how to reset the file 
+first, open the file with vi command like 
+vi f1
+modified data 
+:wq!
+then 
+git add f1
+git commit -am"modified file" f1
+git push 
+
+central repo is differant with local repo then 
+you can not push the files into central repo 
+that time you have to use 
+git pull command
+git pull command is used to merge the central repository new files into local repo 
+after pull this command you have to save one file :wq!
+then 
+you can use git push to push the files into central repo
+
+collabarators
+one  main user repository use multiple developers(users)
+
+------------------------
+4 th video
+git branch(list of branches)
+default master is one branch 
+git branch branchname(create new branch with copy of master branch  )
+git branch( list of branches)
+git checkout newbranchname(changed one branch to another branch)
+touch f9
+one file(f9) created in new branch but its not available in master branch)
+if you need that file using merge command to merge the files into one branch to another branch 
+git merge master-1(master-1 files merged to master branch , that time you have to stay on master branch)
+and 
+push the new branch (master-1) into central repo
+have to use below command
+git push path of central repo master-1
+now, we have two branches in central repo master and master-1
+
+At a time , branch creation and change branch use below command
+git checkout -b master-2
+
+delete branch 
+git branch -d master-1(but u cannot delete the branch(master-1) on with in  branch(master-1), you have to use other branch to delete the other branch)
+
+delete branch in central rep 
+git push origin -d master-1
+
+know the remote branches 
+git branch -r (remote branches means origin/master)
+git branch -a (list of all branches normal branches and remote branches )
+want to delete remote branches using below command
+git branch -D origin/master-1(remote branch)
+
+we have two branches with same files with differnt content 
+that time merging is complict 
+that time you have to follow 3 types 
+one is 
+git merge --abort(skipping the merge(
+manual type that means open the file and change the content or clear the data 
+third one auto merge tools 
+----------------------------------------
+5 th video
+
+stash means temporary storage area for staging files
+list of stash files
+git stash list
+present you have no stash files
+touch a1
+git add a1
+now we have one file a1 in stagaing area
+if you need to store temporarly this file use below command
+git stash save "stash-a"
+created with one stash id 
+a1 is file stored and saved to stash area but not displayed in git staging area 
+if you have to show the file use  below command
+git stash show stash@{x}
+move the file from stash to staging area use below command
+pop
+---
+git stash pop(moved  recent file of stash area into staging area)
+git stash pop stashid(specific stash id moved to staging area)
+
+apply
+-----
+git stash apply stash@{x}
+git stash apply
+
+drop (drop stash files)
+------
+git stash drop (drop all files in stash)
+git stash drop stash@{x}(specific stash file dropped)
+
+
+.gitignore
+-------------
+we have added some  files in workign area but i dont want to display like untracked files through the git status command 
+for that you  need to create one file is .gitignore file 
+open .gitignore file 
+what you files not to display in untracked files 
+add into that .gitingnore file and save the file 
+now check git status 
+the files are not displayed 
+
+give the alias names for any commands we have to use git config --global alias.aliasname "what you as alias"
+example 
+git log --oneline 
+for above command create alias name for "log --oneline"
+git config --global alias.lo "log --oneline"
+"lo" is the alias name for "log --oneline"
+>>git lo
+dispaly all log files with one line 
+create alias name for git status use below command
+git config --global alias. "Status"
+git staus 
+>>git s (s is instead of Status)
+you can create alias name for all commands 
+Now, 
+you have to remove the alias name for any command use below command 
+git config --global unset alias.aliasname
+example 
+>>git config --global --unset alias.lo
+
+now see all alias name s
+git config --list
+
+Tags
+git tag 
+tag is used to assign the version latest commit id's  or you will give tag for specific commit id 
+example 
+list of versions 
+git tag
+create a version 
+git tag v-1.1
+v-1.1 is created for upto latest commit id 
+git status 
+you can see the where version is created
+
+delete the version 
+>>git tag -d v-1.1
+v-1.1 version is deleted 
+
+>git show v-1.1 
+shows version is created for which commit id 
+
+create a version upto specific commit id 
+>>git tag v1.1 cid 
+
+push the version (tag) into central repo use below command
+
+>>git push origin v1.1
+like above 
+push all tags into central repo  use below command
+
+>>git push --tags
+
+delete the version(tag) in central repo 
+>>git push -d v1.1
+v1.1 is deleted in central repo
+
+Mail Notification or Alert Message:s
+
+when some one is push the code into central repo , you need alert message for you email 
+you have to set mail configuration like below
+go to git hub---->settings ---->notifications ---->give the mail id for notifications 
+
+
+--------------------------------------------------
+
+6 th video
+
+git pull command is used to you have extra files in central rep but not in local repo that time you are unable to push the file into central repo that time 
+we used git pull command 
+git pull is fetch+ merge 
+fetch the file from central repo into remote branch(origin/master)
+from origin/master branch merge to local repo 
+git fetch (from central repo to origin/master remote branch)
+from origin/master to local repo
+git merge 
+
+now 
+diff b/w git merge and git rebase 
+when merge command is merge the data from branch that files merged with commit id's that time another commit id created for merge command
+but you can't find which file is merged from through log command
+
+
+git cherry-pick
+
+
+
+
+git clone 
+git init 
+git config --global user.name
+git config --global user.email
+create file 
+untracked files
+git add file name or git add .(all files)- to staging area
+git commit -m "updated or git commit -am "added and updated" (at a time added and commited file)
+git push origin master(branch name)
+
+branching 
+git branch (list of branches)
+git branch branchname(new brach )
+git checkout branchname (switched one batch to another batch)
+git checkout -b branchname(create and swith at a time)
+
+git merge master (merge the files master-1 to master but merging time you have to stay where you have to merge)
+in this merge commit history created 
+
+git merge and git rebase both are same but in git rebase commit history not created when merging but in git merge commit history created)
+
+git log --oneline --graph -all (see the commit history in graphical way in one line)
+git stash(Temporarly delete the modified file but stored in stack ,from stack you can restore )
+git stash -u(temporarly delete untracked files also)
+git stash apply (roll back to delete item)
+git stash list(list of deleted files)
+git stash drop(rollback to delete file but in stack displayed)
+git stash pop(rollback to delete file and also stack also cleaned)
+
+git clean(permenant delete)
+
+git tag(assign version to commit )
+git tag (list of tags)
+git tag tagname(tagname created for latest commit id)
+git tag tagname specific commit id
+git tag -a tagname specific commit id
+gi diff v1.0 v2.0(what difference occured in two versions)
+git tag -d tagname(remove tagname)
+git tag -a oldtagname -f new tagname specific commit id(update tag to another commit id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
